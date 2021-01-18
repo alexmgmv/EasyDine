@@ -151,7 +151,7 @@ public class AdminController {
             msg = "Something went wrong... Please try again!";
             ra.addFlashAttribute("failMsg", msg);
         }
-        return ("redirect:/admin/addRestaurant");
+        return ("redirect:/admin/restaurants");
     }
 
     @GetMapping("users")

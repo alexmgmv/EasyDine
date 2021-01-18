@@ -11,7 +11,7 @@
                 <a class="nav-link" href="${pageContext.request.contextPath}/manager">Home</a>
             </li>
             <li class="nav-item col px-3 py-auto mx-3 my-auto">
-                <a class="nav-link" href="${pageContext.request.contextPath}/manager/info">Personal Info</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/manager/info">My Account</a>
             </li>
             <li class="nav-item col px-3 py-auto mx-3 my-auto">
                 <a class="nav-link" href="${pageContext.request.contextPath}/manager/restaurant">Manage Restaurant</a>
