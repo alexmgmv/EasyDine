@@ -2,8 +2,8 @@
 <html>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-        <title>Spring Boot WebSocket Chat Application | CalliCoder</title>
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css" />
+        <title>EasyDine Chat Application</title>
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/chat.css" />
     </head>
     <body>
         <noscript>
@@ -52,6 +52,6 @@
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
-        <script src="${pageContext.request.contextPath}/js/main.js"></script>
+        <script src="${pageContext.request.contextPath}/js/chat.js"></script>
     </body>
 </html>

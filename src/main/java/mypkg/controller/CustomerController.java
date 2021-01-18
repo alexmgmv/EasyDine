@@ -80,10 +80,10 @@ public class CustomerController {
         try {
             myUserService.createOrUpdate(customer);
             msg = "Your personal information have changed!";
-            ra.addFlashAttribute("customerMsg", msg);
+            ra.addFlashAttribute("successMsg", msg);
         } catch (Exception e) {
             msg = "This username is being used." + "</br>" + "Try a different one!";
-            ra.addFlashAttribute("customerMsg", msg);
+            ra.addFlashAttribute("failMsg", msg);
         }
         return ("redirect:/customer");
     }
@@ -94,11 +94,11 @@ public class CustomerController {
         try {
             myUserService.remove(id);
             msg = "Your account has been deleted!";
-            ra.addFlashAttribute("customerMsg", msg);
+            ra.addFlashAttribute("successMsg", msg);
             return ("redirect:/loginPage");
         } catch (Exception e) {
             msg = "Something went wrong... Please try again!";
-            ra.addFlashAttribute("customerMsg", msg);
+            ra.addFlashAttribute("failMsg", msg);
             return ("redirect:/customer");
         }
     }
@@ -136,19 +136,19 @@ public class CustomerController {
         LocalTime[] businessHours = checkAvailability(reservation);
         if (businessHours[0] == null || businessHours[1] == null) {
             msg = "Sorry! Restaurant is not open today...";
-            ra.addFlashAttribute("customerMsg", msg);
+            ra.addFlashAttribute("failMsg", msg);
         } else if (businessHours[0] != null && businessHours[1] != null && businessHours[1].isAfter(reservation.getArrival())) {
             msg = "Sorry! Restaurant is not open yet...";
-            ra.addFlashAttribute("customerMsg", msg);
+            ra.addFlashAttribute("failMsg", msg);
         } else {
             int seatsTaken = reservationService.calculateTakenSeats(reservation);
             if ((reservation.getNumberOfPeople() + seatsTaken) <= (reservation.getRestaurant().getSeatCapacity())) {
                 paymentMethodChoice(reservation, customer);
                 msg = "Your table has been reserved. Thank you!";
-                ra.addFlashAttribute("customerMsg", msg);
+                ra.addFlashAttribute("successMsg", msg);
             } else {
                 msg = "Sorry! Restaurant has no tables available...";
-                ra.addFlashAttribute("customerMsg", msg);
+                ra.addFlashAttribute("failMsg", msg);
             }
         }
         return ("redirect:/customer");
@@ -176,11 +176,12 @@ public class CustomerController {
                 msg = "Your reservation has been canceled!" + "</br></br>" + "50% App Credits refund.";
             } else {
                 msg = "Your reservation has been canceled!";
+                ra.addFlashAttribute("successMsg", msg);
             }
         } catch (Exception e) {
             msg = "Sorry, something went wrong... Please try again!";
-        }
-        ra.addFlashAttribute("customerMsg", msg);
+            ra.addFlashAttribute("failMsg", msg);
+        }      
         return ("redirect:/customer/reservations");
     }
 
@@ -207,7 +208,7 @@ public class CustomerController {
         reviewService.createOrUpdate(review);
         refreshRestaurantRating(review);
         msg = "Your review has been posted!";
-        ra.addFlashAttribute("customerMsg", msg);
+        ra.addFlashAttribute("successMsg", msg);
         return ("redirect:/customer/reviews");
     }
 
@@ -232,7 +233,7 @@ public class CustomerController {
         reviewService.createOrUpdate(review);
         refreshRestaurantRating(review);
         msg = "Your review has been revised!";
-        ra.addFlashAttribute("customerMsg", msg);
+        ra.addFlashAttribute("successMsg", msg);
         return ("redirect:/customer/reviews");
     }
 
@@ -243,7 +244,7 @@ public class CustomerController {
         reviewService.remove(id);
         refreshRestaurantRating(review);
         msg = "Your review has been deleted!";
-        ra.addFlashAttribute("customerMsg", msg);
+        ra.addFlashAttribute("successMsg", msg);
         return ("redirect:/customer/reviews");
     }
 

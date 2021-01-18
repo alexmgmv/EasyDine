@@ -11,7 +11,7 @@
     <groupId>alexander</groupId>
     <artifactId>EasyDine</artifactId>
     <version>1.0</version>
-    <name>MyEasyDine</name>
+    <name>EasyDine</name>
     <description>group project</description>
 
     <properties>

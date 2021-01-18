@@ -1,32 +1,53 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
-<html>
+<html lang="en"> 
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Restaurant Reviews</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     </head>
-    <body>       
-        <table>
-            <tr>
-                <th>Customer</th>
-                <th>Food Rating</th>
-                <th>Service Rating</th>
-                <th>Value Rating</th>
-                <th>Comments</th>
-            </tr>
-            <c:forEach items="${reviews}" var="review">
-                <tr>
-                    <td>${review.customer.username}</td>
-                    <td>${review.foodRating}</td>
-                    <td>${review.serviceRating}</td>
-                    <td>${review.valueRating}</td>
-                    <td>${review.comments}</td>
-                </tr>
-            </c:forEach>
-        </table>
-        <p>
-            <a href="${pageContext.request.contextPath}/manager">Back</a>
-        </p>  
+
+    <body>  
+        <jsp:include page="navManager.jsp" />
+
+        <main class="container">
+            <div class="jumbotron mx-auto mt-5 bg-light">
+                <h3 class="text-primary">Restaurant Reviews</h3>
+                <c:forEach items="${reviews}" var="review">
+                    <div>
+                        <hr>
+                        <div class="row text-center">
+                            <div class="col my-auto">
+                                <h4>${review.customer.username}</h4>
+                            </div>
+                            <div class="col">
+                                <div class="row">
+                                    <div class="col">
+                                        <label for="foodRating"><b>Food</b></label><br>
+                                        <label for="serviceRating"><b>Service</b></label><br>
+                                        <label for="valueRating"><b>Value</b></label><br>
+                                    </div>
+                                    <div class="col">
+                                        <span id="foodRating">${review.foodRating}</span><br>
+                                        <span id="serviceRating">${review.serviceRating}</span><br>
+                                        <span id="valueRating">${review.valueRating}</span><br>   
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="my-3">
+                            ${review.comments}
+                        </div>
+                    </div>
+                </c:forEach>
+            </div>
+        </main> 
     </body>
+
 </html>

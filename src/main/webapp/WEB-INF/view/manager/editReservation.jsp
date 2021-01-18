@@ -1,40 +1,68 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 <!DOCTYPE html>
-<html>
+<html lang="en"> 
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Reservation Edit Form</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     </head>
+
     <body> 
-        <form:form action="${pageContext.request.contextPath}/manager/editReservation" method="post" modelAttribute="reservation"> 
-            <form:hidden path="id" readonly="true" />
-            <form:hidden path="customer.id" readonly="true" />
-            <form:hidden path="restaurant.id" readonly="true" />
-            <form:hidden path="restaurant.seatCapacity" readonly="true" />
-            <br>
-            <label for="arrivalDate">Date: </label>
-            <form:input id="arrivalDate" type="date" path="arrivalDate" />
-            <br>
-            <label for="arrival">Arrival: </label>
-            <form:input id="arrival" type="time" path="arrival" />
-            <br>
-            <label for="departure">Departure: </label>
-            <form:input id="departure" type="time" path="departure" />
-            <br>
-            Number of People: <form:input type="number" path="numberOfPeople" min="1" max="20" />
-            <br>
-            <label for="choice">Menu Choice: </label>
-            <form:select id="choice" path="menuChoice" items="${restaurantMenuItems}" itemLabel="menuItem.title" itemValue="id" />
-            <br>
-            Payment method: <form:input path="paymentMethod" readonly="true" />
-            <br>
-            Comments: <form:input path="comments" />
-            <br>
-            <input type="submit" value="edit">
-        </form:form>
-        <p>
-            <a href="${pageContext.request.contextPath}/manager">Back</a>
-        </p>  
+        <jsp:include page="navManager.jsp" />
+
+        <main class="container">
+            <div class="jumbotron mx-auto mt-5 col-8 text-center bg-light">
+                <h3 class="text-primary">Register Customer Reservation!</h3>
+                <div class="mt-3">
+                    <form:form action="${pageContext.request.contextPath}/manager/editReservation" method="post" modelAttribute="reservation"> 
+                        <form:hidden path="id" readonly="true" />
+                        <form:hidden path="customer.id" readonly="true" />
+                        <form:hidden path="restaurant.id" readonly="true" />
+                        <form:hidden path="restaurant.seatCapacity" readonly="true" />
+                        <div class="p-1 my-2">
+                            <label for="arrivalDate"><b>Date</b></label><br>
+                            <form:input id="arrivalDate" type="date" path="arrivalDate" />
+                        </div>
+                        <div class="p-1 my-2">
+                            <label for="arrival"><b>Arrival</b></label><br>
+                            <form:input id="arrival" type="time" path="arrival" max="23:00" />
+                        </div>
+                        <div class="p-1 my-2">
+                            <label for="arrival"><b>Departure</b></label><br>
+                            <form:input id="departure" type="time" path="departure" />
+                        </div>
+                        <div class="p-1 my-2">
+                            <label for="number"><b>Number of People</b></label><br>
+                            <form:input type="number" path="numberOfPeople" min="1" max="20" required="required" />
+                        </div>
+                        <div class="p-1 my-2">
+                            <label for="choice"><b>Menu Choice</b></label><br>
+                            <form:select id="choice" path="menuChoice" items="${restaurantMenuItems}" itemLabel="menuItem.title" itemValue="id" />
+                        </div>
+                        <div class="p-1 my-2">
+                            <label for="paymentMethod"><b>Payment method</b></label><br>
+                            <form:input path="paymentMethod" value="cash" readonly="true" />
+                        </div>
+                        <div class="p-1 my-2">
+                            <label for="comments"><b>Comments</b></label><br>
+                            <form:input path="comments" />
+                        </div>
+                        <div class="my-5">
+                            <input class="btn btn-primary mx-3" type="submit" value="Submit"/> 
+                            <a href="${pageContext.request.contextPath}/manager" class="btn btn-warning mx-3">Cancel</a>
+                        </div>
+                    </form:form>
+                </div>
+            </div>
+        </main>
+        
+        <script src="${pageContext.request.contextPath}/js/today.js"></script>
     </body>
+
 </html>

@@ -79,10 +79,10 @@ public class ManagerController {
         try {
             myUserService.createOrUpdate(manager);
             msg = "Your personal information have changed!";
-            ra.addFlashAttribute("managerMsg", msg);
+            ra.addFlashAttribute("successMsg", msg);
         } catch (Exception e) {
             msg = "Something went wrong... Please try again!";
-            ra.addFlashAttribute("managerMsg", msg);
+            ra.addFlashAttribute("failMsg", msg);
         }
         return ("redirect:/manager");
     }
@@ -111,10 +111,10 @@ public class ManagerController {
         try {
             restaurantService.createOrUpdate(restaurant);
             msg = "Restaurant information have changed!";
-            ra.addFlashAttribute("managerMsg", msg);
+            ra.addFlashAttribute("successMsg", msg);
         } catch (Exception e) {
             msg = "Something went wrong... Please try again!";
-            ra.addFlashAttribute("managerMsg", msg);
+            ra.addFlashAttribute("failMsg", msg);
         }
         return ("redirect:/manager/restaurant");
     }
@@ -141,10 +141,10 @@ public class ManagerController {
         try {
             menuPerRestaurantService.createOrUpdate(menuPerRestaurant);
             msg = "Menu has been updated!";
-            ra.addFlashAttribute("managerMsg", msg);
+            ra.addFlashAttribute("successMsg", msg);
         } catch (Exception e) {
             msg = "Something went wrong... Please try again!";
-            ra.addFlashAttribute("managerMsg", msg);
+            ra.addFlashAttribute("failMsg", msg);
         }
         return ("redirect:/manager/restaurant");
     }
@@ -155,10 +155,10 @@ public class ManagerController {
         try {
             menuPerRestaurantService.remove(id);
             msg = "Menu has been updated!";
-            ra.addFlashAttribute("managerMsg", msg);
+            ra.addFlashAttribute("successMsg", msg);
         } catch (Exception e) {
             msg = "Something went wrong... Please try again!";
-            ra.addFlashAttribute("managerMsg", msg);
+            ra.addFlashAttribute("failMsg", msg);
         }
         return ("redirect:/manager/restaurant");
     }
@@ -177,10 +177,10 @@ public class ManagerController {
         try {
             menuPerRestaurantService.createOrUpdate(menuPerRestaurant);
             msg = "Menu has been updated!";
-            ra.addFlashAttribute("managerMsg", msg);
+            ra.addFlashAttribute("successMsg", msg);
         } catch (Exception e) {
             msg = "Something went wrong... Please try again!";
-            ra.addFlashAttribute("managerMsg", msg);
+            ra.addFlashAttribute("failMsg", msg);
         }
         return ("redirect:/manager/restaurant");
     }
@@ -218,19 +218,19 @@ public class ManagerController {
         LocalTime[] businessHours = checkAvailability(reservation);
         if (businessHours[0] == null || businessHours[1] == null) {
             msg = "Sorry! Restaurant is not open today...";
-            ra.addFlashAttribute("managerMsg", msg);
+            ra.addFlashAttribute("failMsg", msg);
         } else if (businessHours[0] != null && businessHours[1] != null && businessHours[1].isAfter(reservation.getArrival())) {
             msg = "Sorry! Restaurant is not open yet...";
-            ra.addFlashAttribute("managerMsg", msg);
+            ra.addFlashAttribute("failMsg", msg);
         } else {
             int seatsTaken = reservationService.calculateTakenSeats(reservation);
             if ((reservation.getNumberOfPeople() + seatsTaken) <= (reservation.getRestaurant().getSeatCapacity())) {
                 reservationService.createOrUpdate(reservation);
                 msg = "Reservation has been verified!";
-                ra.addFlashAttribute("managerMsg", msg);
+                ra.addFlashAttribute("successMsg", msg);
             } else {
                 msg = "Sorry! Restaurant has no tables available...";
-                ra.addFlashAttribute("managerMsg", msg);
+                ra.addFlashAttribute("failMsg", msg);
             }
         }
         return ("redirect:/manager/restaurant");
@@ -251,19 +251,19 @@ public class ManagerController {
         LocalTime[] businessHours = checkAvailability(reservation);
         if (businessHours[0] == null || businessHours[1] == null) {
             msg = "Sorry! Restaurant is not open today...";
-            ra.addFlashAttribute("managerMsg", msg);
+            ra.addFlashAttribute("failMsg", msg);
         } else if (businessHours[0] != null && businessHours[1] != null && businessHours[1].isAfter(reservation.getArrival())) {
             msg = "Sorry! Restaurant is not open yet...";
-            ra.addFlashAttribute("managerMsg", msg);
+            ra.addFlashAttribute("failMsg", msg);
         } else {
             int seatsTaken = reservationService.calculateTakenSeats(reservation);
             if ((reservation.getNumberOfPeople() + seatsTaken) <= (reservation.getRestaurant().getSeatCapacity())) {
                 reservationService.createOrUpdate(reservation);
                 msg = "Reservation has been updated!";
-                ra.addFlashAttribute("managerMsg", msg);
+                ra.addFlashAttribute("successMsg", msg);
             } else {
                 msg = "Sorry! Restaurant has no tables available...";
-                ra.addFlashAttribute("managerMsg", msg);
+                ra.addFlashAttribute("failMsg", msg);
             }
         }
         return ("redirect:/manager/restaurant");
@@ -275,10 +275,10 @@ public class ManagerController {
         try {
             reservationService.remove(id);
             msg = "Reservation has been canceled!";
-            ra.addFlashAttribute("managerMsg", msg);
+            ra.addFlashAttribute("successMsg", msg);
         } catch (Exception e) {
             msg = "Something went wrong... Please try again!";
-            ra.addFlashAttribute("managerMsg", msg);
+            ra.addFlashAttribute("failMsg", msg);
         }
         return ("redirect:/manager/restaurant");
     }
@@ -296,10 +296,10 @@ public class ManagerController {
         try {
             workingHoursService.edit(workingHours);
             msg = "Working hours have been updated!";
-            ra.addFlashAttribute("managerMsg", msg);
+            ra.addFlashAttribute("successMsg", msg);
         } catch (Exception e) {
             msg = "Something went wrong... Please try again!";
-            ra.addFlashAttribute("managerMsg", msg);
+            ra.addFlashAttribute("failMsg", msg);
         }
         return ("redirect:/manager/restaurant");
     }

@@ -46,18 +46,13 @@ public class HomeController {
         try {
             myUserService.createOrUpdate(customer);
             msg = "Thank you for registering!" + "</br></br>" + "You have won 100\u20AC for in-app purchases!!!" + "</br></br>" + "Use your credentials to sign-in.";
-            ra.addFlashAttribute("customerMsg", msg);
-            return ("redirect:/welcome");
+            ra.addFlashAttribute("successMsg", msg);
+            return ("redirect:/loginPage");
         } catch (Exception e) {
             msg = "This username is being used." + "</br>" + "Try a different one!";
-            ra.addFlashAttribute("customerMsg", msg);
+            ra.addFlashAttribute("failMsg", msg);
             return ("redirect:/loginPage");
         }
-    }
-
-    @GetMapping("/welcome")
-    public String registrationConfirmation() {
-        return ("welcome");
     }
 
 }

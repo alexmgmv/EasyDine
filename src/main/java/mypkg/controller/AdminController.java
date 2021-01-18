@@ -71,10 +71,10 @@ public class AdminController {
         try {
             restaurantService.createOrUpdate(restaurant);
             msg = "Restaurant has been added!";
-            ra.addFlashAttribute("adminMsg", msg);
+            ra.addFlashAttribute("successMsg", msg);
         } catch (Exception e) {
             msg = "Something went wrong... Please try again!";
-            ra.addFlashAttribute("adminMsg", msg);
+            ra.addFlashAttribute("failMsg", msg);
         }
         return ("redirect:/admin/restaurants");
     }
@@ -85,10 +85,10 @@ public class AdminController {
         try {
             restaurantService.remove(id);
             msg = "Restaurant has been removed!";
-            ra.addFlashAttribute("adminMsg", msg);
+            ra.addFlashAttribute("successMsg", msg);
         } catch (Exception e) {
             msg = "Something went wrong... Please try again!";
-            ra.addFlashAttribute("adminMsg", msg);
+            ra.addFlashAttribute("failMsg", msg);
         }
         return ("redirect:/admin/restaurants");
     }
@@ -106,10 +106,10 @@ public class AdminController {
         try {
             restaurantService.createOrUpdate(restaurant);
             msg = "Manager has been replaced!";
-            ra.addFlashAttribute("adminMsg", msg);
+            ra.addFlashAttribute("successMsg", msg);
         } catch (Exception e) {
             msg = "Something went wrong... Please try again!";
-            ra.addFlashAttribute("adminMsg", msg);
+            ra.addFlashAttribute("failMsg", msg);
         }
         return ("redirect:/admin/restaurants");
     }
@@ -126,10 +126,10 @@ public class AdminController {
         try {
             restaurantTypeService.createOrUpdate(restaurantType);
             msg = "Restaurant type has been added!";
-            ra.addFlashAttribute("adminMsg", msg);
+            ra.addFlashAttribute("successMsg", msg);
         } catch (Exception e) {
             msg = "Something went wrong... Please try again!";
-            ra.addFlashAttribute("adminMsg", msg);
+            ra.addFlashAttribute("failMsg", msg);
         }
         return ("redirect:/admin/addRestaurant");
     }
@@ -146,10 +146,10 @@ public class AdminController {
         try {
             myUserService.createOrUpdate(manager);
             msg = "Manager has been added!";
-            ra.addFlashAttribute("adminMsg", msg);
+            ra.addFlashAttribute("successMsg", msg);
         } catch (Exception e) {
             msg = "Something went wrong... Please try again!";
-            ra.addFlashAttribute("adminMsg", msg);
+            ra.addFlashAttribute("failMsg", msg);
         }
         return ("redirect:/admin/addRestaurant");
     }
@@ -173,7 +173,7 @@ public class AdminController {
         String msg;
         myUserService.createOrUpdate(user);
         msg = "User information have changed!";
-        ra.addFlashAttribute("adminMsg", msg);
+        ra.addFlashAttribute("successMsg", msg);
         return ("redirect:/admin/users");
     }
 
@@ -183,10 +183,10 @@ public class AdminController {
         try {
             myUserService.remove(id);
             msg = "User has been removed!";
-            ra.addFlashAttribute("adminMsg", msg);
+            ra.addFlashAttribute("successMsg", msg);
         } catch (Exception e) {
             msg = "Something went wrong... Please try again!";
-            ra.addFlashAttribute("adminMsg", msg);
+            ra.addFlashAttribute("failMsg", msg);
         }
         return ("redirect:/admin/users");
     }
@@ -197,10 +197,10 @@ public class AdminController {
         try {
             myUserService.removeUnattachedManagers();
             msg = "All unattached managers have been removed!";
-            ra.addFlashAttribute("adminMsg", msg);
+            ra.addFlashAttribute("successMsg", msg);
         } catch (Exception e) {
             msg = "Something went wrong... Please try again!";
-            ra.addFlashAttribute("adminMsg", msg);
+            ra.addFlashAttribute("failMsg", msg);
         }
         return ("redirect:/admin/users");
     }
