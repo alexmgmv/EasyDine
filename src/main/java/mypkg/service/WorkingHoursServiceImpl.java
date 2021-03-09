@@ -23,4 +23,9 @@ public class WorkingHoursServiceImpl implements WorkingHoursService {
         whdao.save(workingHours);
     }
 
+    @Override
+    public void create(WorkingHours workingHours) {
+        whdao.save(workingHours);
+    }
+
 }

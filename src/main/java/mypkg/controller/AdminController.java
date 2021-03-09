@@ -5,10 +5,12 @@ import mypkg.model.MyUser;
 import mypkg.model.Restaurant;
 import mypkg.model.RestaurantType;
 import mypkg.model.Role;
+import mypkg.model.WorkingHours;
 import mypkg.service.MyUserService;
 import mypkg.service.RestaurantService;
 import mypkg.service.RestaurantTypeService;
 import mypkg.service.RoleService;
+import mypkg.service.WorkingHoursService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,6 +33,8 @@ public class AdminController {
     private RestaurantService restaurantService;
     @Autowired
     private RestaurantTypeService restaurantTypeService;
+    @Autowired
+    private WorkingHoursService workingHoursService;
 
     @ModelAttribute("roloi")
     public List<Role> getRoles() {
@@ -67,9 +71,13 @@ public class AdminController {
 
     @PostMapping("addRestaurant")
     public String addRestaurant(@ModelAttribute("restaurant") Restaurant restaurant, RedirectAttributes ra) {
-        String msg;
-        try {
+        String msg;     
+        try {       
             restaurantService.createOrUpdate(restaurant);
+            int id = restaurant.getId();
+            WorkingHours workingHours = new WorkingHours();
+            workingHours.setRestaurant(restaurant);
+            workingHoursService.create(workingHours);
             msg = "Restaurant has been added!";
             ra.addFlashAttribute("successMsg", msg);
         } catch (Exception e) {
